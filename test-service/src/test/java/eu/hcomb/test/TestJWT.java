@@ -5,12 +5,10 @@ import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.Base64Codec;
-import io.jsonwebtoken.impl.compression.CompressionCodecs;
 import io.jsonwebtoken.impl.crypto.MacProvider;
 
 import java.security.Key;
 import java.util.Date;
-import java.util.List;
 
 public class TestJWT {
 
