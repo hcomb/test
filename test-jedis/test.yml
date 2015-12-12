@@ -1,0 +1,23 @@
+server:
+  applicationConnectors:
+  - type: http 
+    port: 8380
+  adminConnectors:
+  - type: http
+    port: 8381
+  
+logging:
+  level: WARN
+  loggers:
+    "org.glassfish.jersey.servlet.WebComponent": ERROR
+    "com.sun.jersey.api.client": DEBUG
+    "io.dropwizard": DEBUG
+    "eu.hcomb": DEBUG
+    "redis.clients.jedis": DEBUG
+    
+jedisConfig:
+  host: localhost
+  port: 6379
+  minIdle: 0
+  maxIdle: 0
+  maxTotal: 1924
