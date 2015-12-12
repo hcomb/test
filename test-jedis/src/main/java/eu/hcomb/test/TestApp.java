@@ -8,6 +8,7 @@ import redis.clients.jedis.JedisPool;
 import com.google.inject.Binder;
 import com.google.inject.Guice;
 
+import eu.hcomb.common.healthcheck.RedisHealthCheck;
 import eu.hcomb.common.jedis.JedisModule;
 import eu.hcomb.common.web.BaseApp;
 
@@ -33,6 +34,8 @@ public class TestApp extends BaseApp<TestConfig> {
 		injector = Guice.createInjector(this, new JedisModule(configuration));
 		
 		environment.jersey().register(injector.getInstance(HelloWorldResource.class));
+		
+		environment.healthChecks().register("redis", injector.getInstance(RedisHealthCheck.class));
 		
 		JedisPool pool = injector.getInstance(JedisPool.class);
 		final TestSubscriber sub = new TestSubscriber();
