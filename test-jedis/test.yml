@@ -15,7 +15,7 @@ logging:
     "eu.hcomb": DEBUG
     "redis.clients.jedis": DEBUG
     
-jedisConfig:
+redis:
   host: localhost
   port: 6379
   minIdle: 0

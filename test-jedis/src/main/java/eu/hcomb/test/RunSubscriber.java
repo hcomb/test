@@ -1,5 +1,7 @@
 package eu.hcomb.test;
 
+import eu.hcomb.authn.LoginEvents;
+import eu.hcomb.authz.UserEvents;
 import eu.hcomb.common.redis.JedisConfig;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -15,10 +17,16 @@ public class RunSubscriber {
 		JedisPool pool = new JedisPool(poolConfig, JedisConfig.DEFAULT_HOST, JedisConfig.DEFAULT_PORT, Protocol.DEFAULT_TIMEOUT, null);
 		final TestSubscriber sub = new TestSubscriber();
 		final Jedis jedis = pool.getResource();
-		jedis.subscribe(sub, "test");
+		jedis.subscribe(sub,
+					LoginEvents.FAILED_LOGIN,
+					LoginEvents.SUCCESS_LOGIN,
+					UserEvents.CREATE,
+					UserEvents.DELETE,
+					UserEvents.LIST,
+					UserEvents.READ,
+					UserEvents.UPDATE,
+					UserEvents.USER_LOGIN
+				);
 		
-		final TokenSubscriber tokenSub = new TokenSubscriber();
-		jedis.subscribe(tokenSub, "test");
-
 	}
 }

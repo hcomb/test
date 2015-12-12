@@ -6,10 +6,10 @@ import eu.hcomb.common.web.BaseConfig;
 
 public class TestConfig extends BaseConfig implements JedisConfigurable {
 
-	protected JedisConfig jedisConfig = new JedisConfig();
+	protected JedisConfig redis = new JedisConfig();
 
-	public JedisConfig getJedisConfig() {
-		return jedisConfig;
+	public JedisConfig getRedis() {
+		return redis;
 	}
 
 }

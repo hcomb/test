@@ -35,16 +35,14 @@ public class TestApp extends BaseApp<TestConfig> {
 		injector = Guice.createInjector(this, new JedisModule(configuration, environment));
 		
 		environment.jersey().register(injector.getInstance(HelloWorldResource.class));
-		
-		environment.healthChecks().register("redis", injector.getInstance(RedisHealthCheck.class));
-		
+				
 		final TestSubscriber sub = new TestSubscriber();
 		final RedisService redis = injector.getInstance(RedisService.class);
 	    new Thread(new Runnable() {
 	        public void run() {
 	            try {
 	                log.info("Subscription starting.");
-	                redis.subscribe("test", sub);
+	                redis.subscribe(sub, "test");
 	                log.info("Subscription ended.");
 	            } catch (Exception e) {
 	            	log.error("Subscribing failed.", e);
