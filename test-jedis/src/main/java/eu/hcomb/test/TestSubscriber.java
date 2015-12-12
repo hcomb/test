@@ -11,37 +11,33 @@ public class TestSubscriber extends JedisPubSub {
 	
 	@Override
 	public void onMessage(String channel, String message) {
-		log.info("Message received. Channel: "+channel+", Msg: "+ message);
+		log.info("onMessage: "+channel+","+ message);
 	}
 
 	@Override
 	public void onPMessage(String pattern, String channel, String message) {
-		// TODO Auto-generated method stub
+		log.info("onPMessage: "+pattern+","+channel+","+ message);
 		
 	}
 
 	@Override
 	public void onSubscribe(String channel, int subscribedChannels) {
-		// TODO Auto-generated method stub
-		
+		log.info("onSubscribe: "+channel+","+subscribedChannels);
 	}
 
 	@Override
 	public void onUnsubscribe(String channel, int subscribedChannels) {
-		// TODO Auto-generated method stub
-		
+		log.info("onUnsubscribe: "+channel+","+subscribedChannels);
 	}
 
 	@Override
 	public void onPUnsubscribe(String pattern, int subscribedChannels) {
-		// TODO Auto-generated method stub
-		
+		log.info("onPUnsubscribe: "+pattern+","+subscribedChannels);
 	}
 
 	@Override
 	public void onPSubscribe(String pattern, int subscribedChannels) {
-		// TODO Auto-generated method stub
-		
+		log.info("onPSubscribe: "+pattern+","+subscribedChannels);
 	}
 
 	

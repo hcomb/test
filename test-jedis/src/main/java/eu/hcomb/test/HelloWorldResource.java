@@ -5,10 +5,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import redis.clients.jedis.JedisPool;
-
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
+
+import eu.hcomb.common.service.RedisService;
 
 
 @Path("/hello")
@@ -16,13 +16,15 @@ import com.google.inject.Inject;
 public class HelloWorldResource {
 
 	@Inject
-	JedisPool jedisPool;
+	RedisService redisService;
 	
 	@GET
 	@Timed
 	public String sayHello(){
 		
-		jedisPool.getResource().publish("test", "hello!");
+		redisService.publish("test", "hello!");
+		
+		System.out.println("active: " + redisService.getNumActive());
 		
 		return "CIAO ";
 	}

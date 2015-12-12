@@ -8,8 +8,10 @@ import redis.clients.jedis.JedisPool;
 import com.google.inject.Binder;
 import com.google.inject.Guice;
 
-import eu.hcomb.common.healthcheck.RedisHealthCheck;
-import eu.hcomb.common.jedis.JedisModule;
+import eu.hcomb.common.redis.JedisModule;
+import eu.hcomb.common.redis.RedisHealthCheck;
+import eu.hcomb.common.service.RedisService;
+import eu.hcomb.common.service.impl.RedisServiceJedisImpl;
 import eu.hcomb.common.web.BaseApp;
 
 public class TestApp extends BaseApp<TestConfig> {
@@ -24,28 +26,25 @@ public class TestApp extends BaseApp<TestConfig> {
 	}
 	
 	public void configure(Binder binder) {
-		// TODO Auto-generated method stub
-		
+				
 	}
 	
 	@Override
 	public void run(TestConfig configuration, Environment environment) throws Exception {
 
-		injector = Guice.createInjector(this, new JedisModule(configuration));
+		injector = Guice.createInjector(this, new JedisModule(configuration, environment));
 		
 		environment.jersey().register(injector.getInstance(HelloWorldResource.class));
 		
 		environment.healthChecks().register("redis", injector.getInstance(RedisHealthCheck.class));
 		
-		JedisPool pool = injector.getInstance(JedisPool.class);
 		final TestSubscriber sub = new TestSubscriber();
-		final Jedis jedis = pool.getResource();
-		
+		final RedisService redis = injector.getInstance(RedisService.class);
 	    new Thread(new Runnable() {
 	        public void run() {
 	            try {
 	                log.info("Subscription starting.");
-	        		jedis.subscribe(sub, "test");
+	                redis.subscribe("test", sub);
 	                log.info("Subscription ended.");
 	            } catch (Exception e) {
 	            	log.error("Subscribing failed.", e);
