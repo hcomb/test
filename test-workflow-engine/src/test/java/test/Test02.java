@@ -7,6 +7,10 @@ import hcomb.eu.workflow.engine.FlowBuilder;
 import hcomb.eu.workflow.engine.StatefulContext;
 import hcomb.eu.workflow.engine.Transition;
 import hcomb.eu.workflow.engine.call.ContextHandler;
+import hcomb.eu.workflow.engine.call.StateHandler;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Test02 {
 	//test02.png
@@ -38,7 +42,10 @@ public class Test02 {
 				System.out.println(" * leaving "+context.getState());
 			}
 		};
-		
+
+		final ExecutorService service = Executors.newSingleThreadExecutor();
+		flow.executor(service);
+
 		flow.whenEnter("States.NEW_POLICY_SIGNED", enterCtx);
 		flow.whenLeave("States.NEW_POLICY_SIGNED", leaveCtx);
 
@@ -54,8 +61,16 @@ public class Test02 {
 		flow.whenEnter("States.END", enterCtx);
 		flow.whenLeave("States.END", leaveCtx);
 
+		flow.whenFinalState(new StateHandler<StatefulContext>() {
+            public void call(String stateEnum, StatefulContext statefulContext) throws Exception {
+                System.out.println("finished.");
+                service.shutdown();            
+            }
+        });
+		
 		StatefulContext ctx = new StatefulContext();
-        //ctx.setState(States.SAVE_DOCUMENT);
+
+		
 		flow.trace().start(ctx);
         
 		
