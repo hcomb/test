@@ -1,0 +1,62 @@
+{
+	"id": "sign_policy",
+	"version": "0.1",
+	"states": [{
+		"type": "start-state",
+		"id": "NEW_POLICY_SIGNED",
+		"onEnter": "test.OnEnterLog",
+		"onLeave": "test.OnLeaveLog",
+		"transitions": [{
+			"event": "onPolicySigned",
+			"to": "CREATE_PDF_DOCUMENT"
+		}]
+	},
+	{
+		"type": "state",
+		"id": "CREATE_PDF_DOCUMENT",
+		"onEnter": "test.OnEnterLog",
+		"onLeave": "test.OnLeaveLog",
+		"transitions": [{
+			"event": "onDocumentCreated",
+			"to": "SAVE_DOCUMENT"
+		},
+		{
+			"event": "onError",
+			"to": "END2"
+		}]
+	},
+	{
+		"type": "state",
+		"id": "SAVE_DOCUMENT",
+		"onEnter": "test.OnEnterLog",
+		"onLeave": "test.OnLeaveLog",
+		"transitions": [{
+			"event": "onDocumentSaved",
+			"to": "SEND_EMAIL"
+		},
+		{
+			"event": "testBack",
+			"to": "NEW_POLICY_SIGNED"
+		}]
+	},
+	{
+		"type": "state",
+		"id": "SEND_EMAIL",
+		"onEnter": "test.OnEnterLog",
+		"onLeave": "test.OnLeaveLog",
+		"transitions": [{
+			"event": "onEmailSent",
+			"to": "END"
+		}]
+	},
+	{
+		"type": "end-state",
+		"id": "END",
+		"onEnter": "test.OnEnterLog"
+	},
+	{
+		"type": "end-state",
+		"id": "END2",
+		"onEnter": "test.OnEnterLog"
+	}]
+}

@@ -9,7 +9,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>eu.hcomb</groupId>
-			<artifactId>workflow-engine</artifactId>
+			<artifactId>workflow-engine-simple</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 
