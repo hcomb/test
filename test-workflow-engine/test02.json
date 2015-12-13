@@ -1,0 +1,49 @@
+{
+	"id": "sign_policy",
+	"version": "0.1",
+	"states": [{
+		"type": "start-state",
+		"id": "NEW_POLICY_SIGNED",
+		"onEnter": "test.OnEnterLog",
+		"onLeave": "test.OnLeaveLog",
+		"transitions": [{
+			"event": "onPolicySigned",
+			"to": "CREATE_PDF_DOCUMENT"
+		}]
+	},
+	{
+		"type": "state",
+		"id": "CREATE_PDF_DOCUMENT",
+		"onEnter": "test.OnEnterLog",
+		"onLeave": "test.OnLeaveLog",
+		"transitions": [{
+			"event": "onDocumentCreated",
+			"to": "SAVE_DOCUMENT"
+		}]
+	},
+	{
+		"type": "state",
+		"id": "SAVE_DOCUMENT",
+		"onEnter": "test.OnEnterLog",
+		"onLeave": "test.OnLeaveLog",
+		"transitions": [{
+			"event": "onDocumentSaved",
+			"to": "SEND_EMAIL"
+		}]
+	},
+	{
+		"type": "state",
+		"id": "SEND_EMAIL",
+		"onEnter": "test.OnEnterLog",
+		"onLeave": "test.OnLeaveLog",
+		"transitions": [{
+			"event": "onEmailSent",
+			"to": "END"
+		}]
+	},
+	{
+		"type": "end-state",
+		"id": "END",
+		"onEnter": "test.OnEnterLog"
+	}]
+}
