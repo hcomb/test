@@ -1,6 +1,4 @@
-package eu.hcomb.test;
-
-import java.util.List;
+package eu.hcomb.test.reliable;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -17,11 +15,10 @@ public class GetFromQueue {
 		JedisPool pool = new JedisPool(poolConfig, JedisConfig.DEFAULT_HOST, JedisConfig.DEFAULT_PORT, Protocol.DEFAULT_TIMEOUT, null);
 		final Jedis jedis = pool.getResource();
 
-		List<String> messages = null;
         while(true){
-          messages = jedis.blpop(0,"queue.q2");
-          String payload = messages.get(1);
+          String payload = jedis.brpoplpush("queue.q2", "processing.queue.q2", 1000);
           System.out.println("Message received:" + payload);
+          jedis.lrem("processing.queue.q2", 1, payload);
         }
 
 	}

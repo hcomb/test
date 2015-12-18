@@ -38,11 +38,12 @@ public class TestApp extends BaseApp<TestConfig> {
 				
 		final TestSubscriber sub = new TestSubscriber();
 		final RedisService redis = injector.getInstance(RedisService.class);
+		final JedisPool pool = injector.getInstance(JedisPool.class);
 	    new Thread(new Runnable() {
 	        public void run() {
 	            try {
 	                log.info("Subscription starting.");
-	                redis.subscribe(sub, "test");
+	                redis.setupSubscription(pool, sub, "test");
 	                log.info("Subscription ended.");
 	            } catch (Exception e) {
 	            	log.error("Subscribing failed.", e);

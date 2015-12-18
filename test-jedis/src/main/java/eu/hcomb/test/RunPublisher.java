@@ -21,6 +21,7 @@ import eu.hcomb.common.service.impl.RedisServiceJedisImpl;
 public class RunPublisher implements Module {
 	
 	RedisService redis;
+	Injector injector;
 	
 	public void configure(Binder binder) {
 
@@ -37,16 +38,17 @@ public class RunPublisher implements Module {
 	}
 	
 	public void setup() throws JsonProcessingException{
-		Injector injector = Guice.createInjector(this);
+		injector = Guice.createInjector(this);
 		redis = injector.getInstance(RedisService.class);
 	}
 	
-	public Long run() throws JsonProcessingException{
+	public boolean run() throws JsonProcessingException{
+		JedisPool pool = injector.getInstance(JedisPool.class);
 		TokenDTO test = new TokenDTO();
 		test.setExpire(new SecureRandom().nextLong());
 		test.setValid(true);
 		test.setValue("aaaaaa");
-		return redis.publish("test", test);
+		return redis.publish(pool, "test", test);
 	}
 	
 	

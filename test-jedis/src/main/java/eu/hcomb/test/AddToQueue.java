@@ -1,10 +1,10 @@
 package eu.hcomb.test;
 
-import eu.hcomb.common.redis.JedisConfig;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.Protocol;
+import eu.hcomb.common.redis.JedisConfig;
 
 public class AddToQueue {
 
@@ -15,10 +15,12 @@ public class AddToQueue {
 		JedisPool pool = new JedisPool(poolConfig, JedisConfig.DEFAULT_HOST, JedisConfig.DEFAULT_PORT, Protocol.DEFAULT_TIMEOUT, null);
 		final Jedis jedis = pool.getResource();
 
-		for (int i = 0; i < 2000; i++) {
+		for (int i = 0; i < 10; i++) {
 			Thread.sleep(100);
-			jedis.rpush("TEST", "{\"id\":\""+i+"\",\"name\":\"pippo\"}");
+			jedis.rpush("queue.q2", "{\"id\":\""+i+"\",\"name\":\"pippo\"}");
 		}
+		
+		System.exit(0);
 
 	}
 }
