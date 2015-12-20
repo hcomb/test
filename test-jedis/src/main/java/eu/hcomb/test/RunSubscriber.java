@@ -28,5 +28,7 @@ public class RunSubscriber {
 					UserEvents.USER_LOGIN
 				);
 		
+		pool.close();
+		
 	}
 }

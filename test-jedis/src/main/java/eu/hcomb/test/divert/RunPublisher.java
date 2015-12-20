@@ -20,7 +20,7 @@ public class RunPublisher {
 			jedis.publish("test.topic", "hello "+i+"!");
 		}
 		
-		
+		pool.close();
 		
 	}
 }

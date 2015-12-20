@@ -21,6 +21,8 @@ public class ListObjects {
 		for (String key : keys) {
 			System.out.println(key);
 		}
+		
+		pool.close();
 
 	}
 }

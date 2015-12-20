@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class TestJsonMarshaller {
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void main(String[] args) throws Exception {
 		
 		ObjectMapper mapper = new ObjectMapper();

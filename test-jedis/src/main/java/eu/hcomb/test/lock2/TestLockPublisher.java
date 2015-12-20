@@ -13,6 +13,7 @@ public class TestLockPublisher {
 
 	public static final String TOPIC_NAME = "lockabe.test.1";
 	
+	@SuppressWarnings({ "unused", "resource" })
 	public static void main(String[] args) throws Exception {
 		
 		JedisPoolConfig poolConfig = new JedisPoolConfig();

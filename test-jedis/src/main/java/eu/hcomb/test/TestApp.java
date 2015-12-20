@@ -2,18 +2,16 @@ package eu.hcomb.test;
 
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 import com.google.inject.Binder;
 import com.google.inject.Guice;
 
 import eu.hcomb.common.redis.JedisModule;
-import eu.hcomb.common.redis.RedisHealthCheck;
 import eu.hcomb.common.service.RedisService;
-import eu.hcomb.common.service.impl.RedisServiceJedisImpl;
 import eu.hcomb.common.web.BaseApp;
 
+@SuppressWarnings("deprecation")
 public class TestApp extends BaseApp<TestConfig> {
 
 	public static void main(String[] args) throws Exception {

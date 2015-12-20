@@ -19,6 +19,6 @@ public class RunTopicToQueue {
 		System.out.println("* subscribing - " + RunTopicToQueue.class);
 		jedis.subscribe(sub, "test.topic");
 
-		
+		pool.close();
 	}
 }

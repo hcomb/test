@@ -19,6 +19,8 @@ public class AddToQueue {
 			Thread.sleep(100);
 			jedis.rpush("queue.q2", "{\"id\":\""+i+"\",\"name\":\"pippo\"}");
 		}
+
+		pool.close();
 		
 		System.exit(0);
 

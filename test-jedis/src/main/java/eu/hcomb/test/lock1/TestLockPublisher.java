@@ -1,6 +1,5 @@
 package eu.hcomb.test.lock1;
 
-import java.security.SecureRandom;
 import java.util.UUID;
 
 import redis.clients.jedis.Jedis;
@@ -32,7 +31,7 @@ public class TestLockPublisher {
 		}
 		
 		jedis.close();
-		
+		pool.close();
 	}
 	
 	

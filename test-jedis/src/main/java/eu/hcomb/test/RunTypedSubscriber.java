@@ -17,5 +17,6 @@ public class RunTypedSubscriber {
 		final Jedis jedis = pool.getResource();
 		jedis.subscribe(sub, "test");
 
+		pool.close();
 	}
 }

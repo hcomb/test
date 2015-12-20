@@ -19,6 +19,6 @@ public class RunTopicSubscriber {
 		System.out.println("* subscribing - " + RunTopicSubscriber.class);
 		jedis.subscribe(sub, "test.topic");
 
-		
+		pool.close();
 	}
 }

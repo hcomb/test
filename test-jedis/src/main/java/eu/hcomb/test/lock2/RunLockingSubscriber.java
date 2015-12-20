@@ -47,7 +47,7 @@ public class RunLockingSubscriber {
 		System.out.println("* subscribing");
 		jedis.subscribe(sub, TestLockPublisher.TOPIC_NAME);
 
-		
+		pool.close();
 		
 	}
 }

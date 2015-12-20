@@ -18,5 +18,6 @@ public class RunLockingSubscriber {
 		final LockingSubscriber sub = new LockingSubscriber(lockJedis);
 		jedis.subscribe(sub, TestLockPublisher.TOPIC_NAME);
 		
+		pool.close();
 	}
 }

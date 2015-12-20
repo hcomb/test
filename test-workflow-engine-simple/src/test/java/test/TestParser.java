@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class TestParser {
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static EasyFlow<StatefulContext> parseWorkflow(String file) throws Exception {
 
 		ObjectMapper mapper = new ObjectMapper();
@@ -42,6 +43,7 @@ public class TestParser {
 	}
 
 
+	@SuppressWarnings({ "unchecked", "rawtypes", "unused" })
 	public static Transition[] getStartStateTransitions(List<Map> states) {
 		Set<String> navigated = new HashSet<String>();
 
@@ -84,6 +86,7 @@ public class TestParser {
 	}
 
 
+	@SuppressWarnings({ "rawtypes", "unused", "unchecked" })
 	public static Transition[] getTransitions(List<Map> states, String toSt, Set<String> navigated) {
 	//	System.out.println("== getTransitions(states,"+toSt+")");
 		List<String> trNames = new ArrayList<String>();
@@ -130,6 +133,7 @@ public class TestParser {
 	}
 
 
+	@SuppressWarnings("rawtypes")
 	public static boolean checkIsEndState(List<Map> states, String stateName) {
 //		System.out.println("== checkIsEndState(states,"+stateName+")");
 		for (Map state : states) {
@@ -142,6 +146,7 @@ public class TestParser {
 	}
 
 
+	@SuppressWarnings({ "unused", "rawtypes", "unchecked" })
 	public static FlowBuilder<StatefulContext> getStartState(List<Map> states) {
 //		System.out.println("== getStartState(states)");
 		for (Map state : states) {
