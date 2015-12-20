@@ -12,7 +12,8 @@ public class AlwaysSucceed extends TenacityCommand<String> {
 		});
     }
 
-    @Override
+    @SuppressWarnings("unused")
+	@Override
     protected String run() throws Exception {
     	if(true)
     		throw new RuntimeException("a");
